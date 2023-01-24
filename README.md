@@ -30,8 +30,19 @@ Getting consistent exploratory data analysis and investigative environments crea
 
 - Use a folder from the host system in docker instance (assumes default container name of 'jovyan')
 
+<strike>
     ```docker run --mount 'type=bind, src="C:\users\public\myNotebooks", dst=/home/jovyan/work' jischellmsft/kqlmagic```
+</strike>
+
+    ```docker run --rm -v 'C:\users\public\myNotebooks:/home/jovyan/work' -it jischellmsft/kqlmagic```
 
 - Start container with all of the optional examples above
 
-    ```docker run -p 16384:8888 -e JUPYTER_ENABLE_LAB=yes --mount 'type=bind, src="C:\users\public\myNotebooks", dst=/home/jovyan/work' jischellmsft/kqlmagic```
+    ```docker run --rm -p 16384:8888 -e JUPYTER_ENABLE_LAB=yes -v 'C:\users\public\myNotebooks:/home/jovyan/work' -it jischellmsft/kqlmagic -it jischellmsft/kqlmagic```
+
+- Use the Start-DockerImage script
+
+    ```
+    . .\Start-DockerImage.ps1
+    Start-DockerImage -ImageName jischellmsft/kqlmagic -FolderToMap C:\users\public\myNotebooks -LocalPort 16384
+    ```
