@@ -13,7 +13,7 @@ function Start-DockerImage
         $FolderToMap,
 
         [Parameter()]
-        [int]
+        [Int32]
         $LocalPort = 8888
     )
 
@@ -29,7 +29,7 @@ function Start-DockerImage
     Process
     {
         $folderBindArg = $FolderToMap + ':/home/jovyan/work'
-        $portMapArg = $LocalPort + ':8888'
+        $portMapArg = "$($LocalPort):8888"
         docker run --rm -p $portMapArg -e "JUPYTER_ENABLE_LAB=yes" -v $folderBindArg -it $ImageName
     }
 }
