@@ -34,7 +34,9 @@ Getting consistent exploratory data analysis and investigative environments crea
     ```docker run --mount 'type=bind, src="C:\users\public\myNotebooks", dst=/home/jovyan/work' jischellmsft/kqlmagic```
 </strike>
 
-    ```docker run --rm -v 'C:\users\public\myNotebooks:/home/jovyan/work' -it jischellmsft/kqlmagic```
+    ```
+    docker run --rm -v 'C:\users\public\myNotebooks:/home/jovyan/work' -it jischellmsft/kqlmagic
+    ```
 
 - Start container with all of the optional examples above
 
