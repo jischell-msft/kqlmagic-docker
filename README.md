@@ -31,12 +31,14 @@ Getting consistent exploratory data analysis and investigative environments crea
 - Use a folder from the host system in docker instance (assumes default container name of 'jovyan')
 
 <strike>
-    ```docker run --mount 'type=bind, src="C:\users\public\myNotebooks", dst=/home/jovyan/work' jischellmsft/kqlmagic```
+<code>
+    docker run --mount 'type=bind, src="C:\users\public\myNotebooks", dst=/home/jovyan/work' jischellmsft/kqlmagic
+</code>    
 </strike>
 
-    ```
+<code>
     docker run --rm -v 'C:\users\public\myNotebooks:/home/jovyan/work' -it jischellmsft/kqlmagic
-    ```
+</code>
 
 - Start container with all of the optional examples above
 
