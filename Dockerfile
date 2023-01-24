@@ -1,17 +1,23 @@
 ARG BASE_CONTAINER=jupyter/scipy-notebook
 FROM $BASE_CONTAINER
 
+
+# Fix: https://github.com/hadolint/hadolint/wiki/DL4006
+# Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 USER root
 
 RUN apt-get update --yes && \
     apt-get install --yes \
     libgirepository1.0-dev \
-    libcairo2-dev \
-    python3-dev \ 
-    gir1.2-secret-1 && \
+    libcairo2-dev && \
+#    python3-dev \ 
+#    gir1.2-secret-1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-USER $NB_UID
+USER ${NB_UID}
+
 
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
@@ -50,3 +56,7 @@ RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
 # we can just do that during the build process and the user never has to
 # see it.
 RUN /opt/conda/bin/python -c 'import plotly'
+
+USER ${NB_UID}
+
+WORKDIR "${HOME}"
